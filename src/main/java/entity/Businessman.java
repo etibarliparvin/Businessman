@@ -12,11 +12,14 @@ public class Businessman {
     private String phone;
     private Integer birthplaceId;
     private Integer nationalityId;
+    private Country countryName;
+    private Country nationality;
+    private Company company;
 
     public Businessman() {
     }
 
-    public Businessman(Integer id, String name, String surname, Date birthdate, String address, String email, String phone, Integer birthplaceId, Integer nationalityId) {
+    public Businessman(Integer id, String name, String surname, Date birthdate, String address, String email, String phone, Integer birthplaceId, Integer nationalityId, Country countryName, Country nationality, Company company) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -26,6 +29,9 @@ public class Businessman {
         this.phone = phone;
         this.birthplaceId = birthplaceId;
         this.nationalityId = nationalityId;
+        this.countryName = countryName;
+        this.nationality = nationality;
+        this.company = company;
     }
 
     public Integer getId() {
@@ -100,6 +106,30 @@ public class Businessman {
         this.nationalityId = nationalityId;
     }
 
+    public Country getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(Country countryName) {
+        this.countryName = countryName;
+    }
+
+    public Country getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(Country nationality) {
+        this.nationality = nationality;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
         return "Businessman{" +
@@ -112,6 +142,9 @@ public class Businessman {
                 ", phone='" + phone + '\'' +
                 ", birthplaceId=" + birthplaceId +
                 ", nationalityId=" + nationalityId +
+                ", countryName=" + countryName +
+                ", nationality=" + nationality +
+                ", company=" + company +
                 '}';
     }
 }

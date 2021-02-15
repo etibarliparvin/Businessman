@@ -5,7 +5,7 @@ import DaoInter.CountryDaoInter;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        CountryDaoInter dao = Contex.instanceCountryDao();
+        BusinessmanDaoInter dao = Contex.instanceBusinessmanDao();
         System.out.println(dao.getAll());
     }
 }

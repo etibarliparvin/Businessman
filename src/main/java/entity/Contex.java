@@ -9,7 +9,7 @@ import DaoInter.CountryDaoInter;
 
 public class Contex {
 
-    public static BusinessmanDaoInter instanceUserDao() {
+    public static BusinessmanDaoInter instanceBusinessmanDao() {
         return new BusinessmanDaoImpl();
     }
 

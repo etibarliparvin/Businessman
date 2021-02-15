@@ -3,6 +3,7 @@ package DaoImpl;
 import DaoInter.AbstractDao;
 import DaoInter.CompanyDaoInter;
 import entity.Company;
+import entity.Country;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +19,9 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDaoInter {
         String companyName = rs.getString("company_name");
         int businessmanId = rs.getInt("businessman_id");
         int locationId = rs.getInt("location_id");
-        return new Company(id, companyName, businessmanId, locationId);
+        String countryNameStr = rs.getString("country_name");
+        Country countryName = new Country(null, countryNameStr, null);
+        return new Company(id, companyName, businessmanId, locationId, countryName);
     }
 
     @Override
@@ -27,7 +30,8 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDaoInter {
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            stmt.execute("select * from company");
+            stmt.execute("select c.*, c1.country_name from company c " +
+                    "left join country c1 on c.location_id = c1.id");
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result.add(getCompany(rs));
@@ -44,7 +48,8 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDaoInter {
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            stmt.execute("select * from company where id = " + id);
+            stmt.execute("select c.*, c1.country_name from company c " +
+                    "left join country c1 on c.location_id = c1.id where id = " + id);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result = getCompany(rs);
