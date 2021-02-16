@@ -1,6 +1,7 @@
 package DaoInter;
 
 import entity.Businessman;
+import entity.Company;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface BusinessmanDaoInter {
     public boolean add(Businessman b);
 
     public boolean remove(int id);
+
+    public List<Company> getAllCompaniesByBusinessmanId(int userId);
 
 }

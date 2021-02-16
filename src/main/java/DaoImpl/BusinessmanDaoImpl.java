@@ -136,4 +136,33 @@ public class BusinessmanDaoImpl extends AbstractDao implements BusinessmanDaoInt
             return false;
         }
     }
+
+    private Company getCompany(ResultSet rs) throws Exception {
+        int id = rs.getInt("id");
+        String companyName = rs.getString("company_name");
+        int businessmanId = rs.getInt("businessman_id");
+        int locationId = rs.getInt("location_id");
+        String countryNameStr = rs.getString("country_name");
+        Country countryName = new Country(null, countryNameStr, null);
+        return new Company(id, companyName, businessmanId, locationId, countryName);
+    }
+
+    @Override
+    public List<Company> getAllCompaniesByBusinessmanId(int userId) {
+        List<Company> result = new ArrayList<>();
+        try {
+            Connection c = connect();
+            PreparedStatement stmt = c.prepareStatement("select c.*, c1.country_name from company c " +
+                    "left join country c1 on c.location_id = c1.id " +
+                    "where businessman_id = " + userId);
+            stmt.execute();
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                result.add(getCompany(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
 }

@@ -1,6 +1,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Businessman {
     private Integer id;
@@ -14,12 +15,12 @@ public class Businessman {
     private Integer nationalityId;
     private Country countryName;
     private Country nationality;
-    private Company company;
+    private List<Company> companies;
 
     public Businessman() {
     }
 
-    public Businessman(Integer id, String name, String surname, Date birthdate, String address, String email, String phone, Integer birthplaceId, Integer nationalityId, Country countryName, Country nationality, Company company) {
+    public Businessman(Integer id, String name, String surname, Date birthdate, String address, String email, String phone, Integer birthplaceId, Integer nationalityId, Country countryName, Country nationality, List<Company> companies) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -31,7 +32,7 @@ public class Businessman {
         this.nationalityId = nationalityId;
         this.countryName = countryName;
         this.nationality = nationality;
-        this.company = company;
+        this.companies = companies;
     }
 
     public Integer getId() {
@@ -122,12 +123,12 @@ public class Businessman {
         this.nationality = nationality;
     }
 
-    public Company getCompany() {
-        return company;
+    public List<Company> getCompanies() {
+        return companies;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
     }
 
     @Override
@@ -144,7 +145,7 @@ public class Businessman {
                 ", nationalityId=" + nationalityId +
                 ", countryName=" + countryName +
                 ", nationality=" + nationality +
-                ", company=" + company +
+                ", companies=" + companies +
                 '}';
     }
 }
