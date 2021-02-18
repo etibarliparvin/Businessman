@@ -1,6 +1,6 @@
 package entity;
 
-import DaoInter.BusinessmanDaoInter;
+import Dao.Inter.BusinessmanDaoInter;
 
 public class Main {
     public static void main(String[] args) throws Exception {

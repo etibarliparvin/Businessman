@@ -1,11 +1,11 @@
 package entity;
 
-import DaoImpl.CompanyDaoImpl;
-import DaoImpl.CountryDaoImpl;
-import DaoInter.BusinessmanDaoInter;
-import DaoImpl.BusinessmanDaoImpl;
-import DaoInter.CompanyDaoInter;
-import DaoInter.CountryDaoInter;
+import Dao.Impl.CompanyDaoImpl;
+import Dao.Impl.CountryDaoImpl;
+import Dao.Inter.BusinessmanDaoInter;
+import Dao.Impl.BusinessmanDaoImpl;
+import Dao.Inter.CompanyDaoInter;
+import Dao.Inter.CountryDaoInter;
 
 public class Contex {
 

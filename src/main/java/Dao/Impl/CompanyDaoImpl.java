@@ -1,7 +1,7 @@
-package DaoImpl;
+package Dao.Impl;
 
-import DaoInter.AbstractDao;
-import DaoInter.CompanyDaoInter;
+import Dao.Inter.AbstractDao;
+import Dao.Inter.CompanyDaoInter;
 import entity.Company;
 import entity.Country;
 
@@ -132,5 +132,24 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDaoInter {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Company> getAllCompaniesByBusinessmanId(int userId) {
+        List<Company> result = new ArrayList<>();
+        try {
+            Connection c = connect();
+            PreparedStatement stmt = c.prepareStatement("select c.*, c1.country_name from company c " +
+                    "left join country c1 on c.location_id = c1.id " +
+                    "where businessman_id = " + userId);
+            stmt.execute();
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                result.add(getCompany(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }

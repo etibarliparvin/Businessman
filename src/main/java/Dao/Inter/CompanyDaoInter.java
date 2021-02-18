@@ -1,4 +1,4 @@
-package DaoInter;
+package Dao.Inter;
 
 import entity.Company;
 
@@ -19,4 +19,6 @@ public interface CompanyDaoInter {
     public boolean removeById(int id);
 
     public boolean removeByName(String name);
+
+    public List<Company> getAllCompaniesByBusinessmanId(int userId);
 }

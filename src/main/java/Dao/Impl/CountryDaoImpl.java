@@ -1,8 +1,7 @@
-package DaoImpl;
+package Dao.Impl;
 
-import DaoInter.AbstractDao;
-import DaoInter.CountryDaoInter;
-import entity.Company;
+import Dao.Inter.AbstractDao;
+import Dao.Inter.CountryDaoInter;
 import entity.Country;
 
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package DaoInter;
+package Dao.Inter;
 
 import entity.Country;
 
