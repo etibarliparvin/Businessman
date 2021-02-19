@@ -8,11 +8,11 @@ public interface WorkerDaoInter {
 
     public List<Worker> getAll();
 
-    public Worker getById(int id);
+    public Worker getById(int userId);
 
     public boolean update(Worker w);
 
     public boolean add(Worker w);
 
-    public boolean remove(int id);
+    public boolean remove(int userId);
 }

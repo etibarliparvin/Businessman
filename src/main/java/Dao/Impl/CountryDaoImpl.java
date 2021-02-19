@@ -38,12 +38,12 @@ public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
     }
 
     @Override
-    public Country getById(int id) {
+    public Country getById(int userId) {
         Country result = null;
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            stmt.execute("select * from country where id = " + id);
+            stmt.execute("select * from country where id = " + userId);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result = getCountry(rs);
@@ -101,11 +101,11 @@ public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
     }
 
     @Override
-    public boolean remove(int id) {
+    public boolean remove(int userId) {
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            return stmt.execute("delete from country where id = " + id);
+            return stmt.execute("delete from country where id = " + userId);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

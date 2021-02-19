@@ -9,12 +9,12 @@ public interface BusinessmanDaoInter {
 
     public List<Businessman> getAll();
 
-    public Businessman getById(int id);
+    public Businessman getById(int userId);
 
     public boolean update(Businessman b);
 
     public boolean add(Businessman b);
 
-    public boolean remove(int id);
+    public boolean remove(int userId);
 
 }

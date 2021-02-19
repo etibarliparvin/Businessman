@@ -8,7 +8,7 @@ public interface CountryDaoInter {
 
     public List<Country> getAll();
 
-    public Country getById(int id);
+    public Country getById(int userId);
 
     public Country betByName(String name);
 
@@ -16,6 +16,6 @@ public interface CountryDaoInter {
 
     public boolean add(Country country);
 
-    public boolean remove(int id);
+    public boolean remove(int userId);
 
 }

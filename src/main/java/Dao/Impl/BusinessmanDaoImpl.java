@@ -52,14 +52,14 @@ public class BusinessmanDaoImpl extends AbstractDao implements BusinessmanDaoInt
     }
 
     @Override
-    public Businessman getById(int id) {
+    public Businessman getById(int userId) {
         Businessman result = null;
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
             stmt.execute("select b.*, c1.country_name, c2.nationality from businessman b " +
                     "left join country c1 on b.birthplace_id = c1.id " +
-                    "left join country c2 on b.nationality_id = c2.id where id = " + id);
+                    "left join country c2 on b.nationality_id = c2.id where id = " + userId);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result = getBusinessman(rs);
@@ -114,15 +114,14 @@ public class BusinessmanDaoImpl extends AbstractDao implements BusinessmanDaoInt
     }
 
     @Override
-    public boolean remove(int id) {
+    public boolean remove(int userId) {
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            return stmt.execute("delete from businessman where id = " + id);
+            return stmt.execute("delete from businessman where id = " + userId);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
-
 }

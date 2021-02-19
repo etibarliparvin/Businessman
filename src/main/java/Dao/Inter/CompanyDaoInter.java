@@ -8,7 +8,7 @@ public interface CompanyDaoInter {
 
     public List<Company> getAll();
 
-    public Company getById(int id);
+    public Company getById(int userId);
 
     public Company getByName(String name);
 
@@ -16,7 +16,7 @@ public interface CompanyDaoInter {
 
     public boolean add(Company company);
 
-    public boolean removeById(int id);
+    public boolean removeById(int userId);
 
     public boolean removeByName(String name);
 

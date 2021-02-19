@@ -43,13 +43,13 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDaoInter {
     }
 
     @Override
-    public Company getById(int id) {
+    public Company getById(int userId) {
         Company result = null;
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
             stmt.execute("select c.*, c1.country_name from company c " +
-                    "left join country c1 on c.location_id = c1.id where id = " + id);
+                    "left join country c1 on c.location_id = c1.id where id = " + userId);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result = getCompany(rs);
@@ -111,11 +111,11 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDaoInter {
     }
 
     @Override
-    public boolean removeById(int id) {
+    public boolean removeById(int userId) {
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            return stmt.execute("delete from company where id = " + id);
+            return stmt.execute("delete from company where id = " + userId);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

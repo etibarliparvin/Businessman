@@ -21,8 +21,7 @@ public class WorkerCompanyDaoImpl extends AbstractDao implements WorkerCompanyDa
         int companyId = rs.getInt("company_id");
         int workerId = rs.getInt("worker_id");
         double salary = rs.getDouble("salary");
-
-        Company company = Contex.instanceCompanyDao().getById(id);
+        Company company = Contex.instanceCompanyDao().getById(companyId);
         Worker worker = Contex.instanceWorkerDao().getById(workerId);
         return new WorkerCompany(id, company, worker, salary);
     }
@@ -45,12 +44,12 @@ public class WorkerCompanyDaoImpl extends AbstractDao implements WorkerCompanyDa
     }
 
     @Override
-    public WorkerCompany getById(int id) {
+    public WorkerCompany getById(int userId) {
         WorkerCompany result = null;
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            stmt.execute("select * from worker_company");
+            stmt.execute("select * from worker_company where id = " + userId);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result = getWorkerCompany(rs);
@@ -65,10 +64,10 @@ public class WorkerCompanyDaoImpl extends AbstractDao implements WorkerCompanyDa
     public boolean update(WorkerCompany wc) {
         try {
             Connection c = connect();
-            PreparedStatement stmt = c.prepareStatement("update worker_company set company_id = ?, " +
-                    "worker_id = ?, salary = ? where id = ?");
-            stmt.setInt(1, wc.getCompany());
-
+            PreparedStatement stmt = c.prepareStatement("update worker_company set salary = ? where id = ?");
+            stmt.setDouble(1, wc.getSalary());
+            stmt.setInt(2, wc.getId());
+            return stmt.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -77,11 +76,47 @@ public class WorkerCompanyDaoImpl extends AbstractDao implements WorkerCompanyDa
 
     @Override
     public boolean add(WorkerCompany wc) {
-        return false;
+        try {
+            Connection c = connect();
+            PreparedStatement stmt = c.prepareStatement("insert into worker_company (company_id, worker_id, salary)" +
+                    "values(?, ?, ?)");
+            stmt.setInt(1, wc.getCompany().getId());
+            stmt.setInt(2, wc.getWorker().getId());
+            stmt.setDouble(3, wc.getSalary());
+            return stmt.execute();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public boolean remove(int id) {
-        return false;
+    public boolean remove(int userId) {
+        try {
+            Connection c = connect();
+            Statement stmt = c.createStatement();
+            return stmt.execute("delete from worker_company where id = " + userId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<WorkerCompany> getAllWorkerCompanyByWorkerId(int userId) {
+        List<WorkerCompany> result = new ArrayList<>();
+        try {
+            Connection c = connect();
+            PreparedStatement stmt = c.prepareStatement("select wc.*, c.company_name from worker_company wc " +
+                    "left join company c on wc.company_id = c.id where worker_id = " + userId);
+            stmt.execute();
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()){
+                result.add(getWorkerCompany(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }
