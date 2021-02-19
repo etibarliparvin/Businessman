@@ -38,9 +38,9 @@ public class BusinessmanDaoImpl extends AbstractDao implements BusinessmanDaoInt
         try {
             Connection c = connect();
             Statement stmt = c.createStatement();
-            stmt.execute("select b.*, c1.country_name, c2.nationality from businessman b " +
-                    "left join country c1 on b.birthplace_id = c1.id " +
-                    "left join country c2 on b.nationality_id = c2.id");
+                stmt.execute("select b.*, c1.country_name, c2.nationality from businessman b " +
+                        "left join country c1 on b.birthplace_id = c1.id " +
+                        "left join country c2 on b.nationality_id = c2.id");
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result.add(getBusinessman(rs));

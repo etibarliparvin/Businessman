@@ -1,11 +1,7 @@
 package entity;
 
-import Dao.Impl.CompanyDaoImpl;
-import Dao.Impl.CountryDaoImpl;
-import Dao.Inter.BusinessmanDaoInter;
-import Dao.Impl.BusinessmanDaoImpl;
-import Dao.Inter.CompanyDaoInter;
-import Dao.Inter.CountryDaoInter;
+import Dao.Impl.*;
+import Dao.Inter.*;
 
 public class Contex {
 
@@ -19,5 +15,13 @@ public class Contex {
 
     public static CountryDaoInter instanceCountryDao() {
         return new CountryDaoImpl();
+    }
+
+    public static WorkerDaoInter instanceWorkerDao() {
+        return new WorkerDaoImpl();
+    }
+
+    public static WorkerCompanyDaoInter instanceWorkerCompanyDao() {
+        return new WorkerCompanyDaoImpl();
     }
 }

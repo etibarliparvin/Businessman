@@ -20,7 +20,7 @@ public class Worker {
     public Worker() {
     }
 
-    public Worker(Integer id, String name, String surname, Date birthdate, String address, String email, String phone, Integer birthplaceId, Integer nationalityId, Country countryName, Country nationality) {
+    public Worker(Integer id, String name, String surname, Date birthdate, String address, String email, String phone, Integer birthplaceId, Integer nationalityId, Country countryName, Country nationality, List<WorkerCompany> companies) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -32,6 +32,7 @@ public class Worker {
         this.nationalityId = nationalityId;
         this.countryName = countryName;
         this.nationality = nationality;
+        this.companies = companies;
     }
 
     public Integer getId() {
@@ -122,6 +123,14 @@ public class Worker {
         this.nationality = nationality;
     }
 
+    public List<WorkerCompany> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<WorkerCompany> companies) {
+        this.companies = companies;
+    }
+
     @Override
     public String toString() {
         return "Worker{" +
@@ -136,6 +145,7 @@ public class Worker {
                 ", nationalityId=" + nationalityId +
                 ", countryName=" + countryName +
                 ", nationality=" + nationality +
+                ", companies=" + companies +
                 '}';
     }
 }
